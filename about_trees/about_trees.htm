@@ -1,0 +1,316 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="hr">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<title>About trees</title>
+<style>
+<!--
+.c1          { font-family: Verdana; font-size: 12pt; color: #000080; font-weight: bold }
+.c2          { font-family: Verdana; font-size: 10pt }
+.para2 { margin-top: 15px; margin-left: 15px; margin-right: 50px; font-family: "font1, Arial Black"; font-size: 50px; line-height: 40px; text-align: left; color: #004080; }
+.para1 { margin-top: -42px; margin-left: 145px; margin-right: 10px; font-family: "font2, Arial"; font-size: 30px; line-height: 35px; text-align: left; color: #E1E1E1; }
+-->
+</style>
+</head>
+
+<body>
+
+<div align="center">
+  <center>
+  <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-style: dotted; padding: 1" bordercolor="#111111" width="97%" id="AutoNumber1" height="491">
+    <tr>
+      <td width="100%" height="491" valign="top">
+      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2" height="601">
+        <tr>
+          <td width="5%" height="34">&nbsp;</td>
+          <td width="195%" height="34">
+          <p class="c1">About trees</td>
+        </tr>
+        <tr>
+          <td width="5%" height="139">&nbsp;</td>
+          <td width="195%" height="139" valign="top" class="c2">Hi my name is 
+          Edin and&nbsp; i am from Bosnia and Hercegovina. Ok.<br>
+          <br>
+          Those days I was stadyng Numeric Math and i&nbsp; needed to plot some 
+          functions, implement some algoritams and stuff&nbsp; like that. First 
+          thing i needed was something that evalutes expresions. Shearching&nbsp; 
+          on net i found several modules, but evrything i found works at the 
+          same princip, each time you&nbsp; evalute exppresion it parses 
+          expresion string. I know that it could be better so&nbsp; I had to 
+          make it aluuun (by myself).&nbsp; Few monts ago i found excelent free 
+          book about programing in Java at address
+          <a href="http://math.hws.edu/javanotes/">
+          http://math.hws.edu/javanotes/</a>, and introduction about making 
+          expresion trees.</td>
+        </tr>
+        <tr>
+          <td width="5%" height="30">&nbsp;</td>
+          <td width="195%" height="30" valign="top" class="c1">Basic idea<hr color="#C0C0C0" align="left" style="border: 1px dotted #000080; padding: 1; background-color: #004080" size="1"></td>
+        </tr>
+        <tr>
+          <td width="5%" height="63">&nbsp;</td>
+          <td width="195%" height="63" valign="top" class="c2">Build a binary 
+          tree from math expresion. An expresion binary tree is created from 
+          class define like this <br>
+          <br>
+          <font face="Courier">Class <b>ExpNode</b> <font color="#008000">'this 
+          is cls (Class) file in vb&nbsp;&nbsp;&nbsp; </font><br>
+&nbsp;&nbsp;&nbsp; LeftNode As <b>ExpNode</b><br>
+&nbsp;&nbsp;&nbsp; RightNode As <b>ExpNode <br>
+&nbsp;<font color="#008000">&nbsp; '------------------------</font><br>
+&nbsp;&nbsp;&nbsp; </b>public<b> </b>Value As Double<br>
+&nbsp;&nbsp;&nbsp; public Op As String&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <font color="#008000">'name of operator or function</font><br>
+&nbsp;&nbsp;&nbsp; public sExp As String&nbsp;&nbsp;&nbsp; <font color="#008000">
+          'part of string expresion</font><br>
+&nbsp;&nbsp;&nbsp; public Kind As NodeKind&nbsp; <font color="#008000">'enum of 
+          node types ( NodeValue=0, NodeOp=1, etc. )<br>
+&nbsp;&nbsp;&nbsp; <br>
+          </font>&nbsp;&nbsp;&nbsp; sub SetNode(op as string , val as double)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if op=&quot;&quot; then Kind=NodeValue else Kind = 
+          OpNode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value = val<br>
+&nbsp;&nbsp;&nbsp; end sub</font><p><font face="Courier">&nbsp;&nbsp;&nbsp; 
+          Function GetValue() As Double<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dim X As Double, Y As Double<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If Kind = NodeValue Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GetValue = Value
+          <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ElseIf Kind = NodeOp Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If Not LeftNode Is 
+          Nothing Then X = LeftNode.GetValue()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If Not RightNode Is 
+          Nothing Then Y = RightNode.GetValue()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Select Case op<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          Case &quot;+&quot;: GetValue = x + y<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          Case &quot;-&quot;: GetValue = x -&nbsp; y<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          Case &quot;*&quot;: GetValue = x * y<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          Case &quot;/&quot;: GetValue = x&nbsp; /&nbsp; y<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          Case &quot;^&quot;: GetValue = x ^ y <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End Select<br>
+          <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End If<br>
+&nbsp;&nbsp;&nbsp;&nbsp; End Function<br>
+          End Class</font><br>
+          <br>
+          When you define class&nbsp; you can try things like this:</p>
+          <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="81%" id="AutoNumber3" height="181" class="c2">
+            <tr>
+              <td width="61%" height="181" valign="top"><b>Simple tree<br>
+&nbsp;<font face="Courier"> </font></b><font face="Courier">Dim Node As New 
+              ExpNode<br>
+&nbsp;Node.Value= 100<br>
+&nbsp;Node.Kind = NodeValue<br>
+&nbsp;Debug.Print Node.GetValue() </font><font face="Courier" color="#008000">
+              <br>
+&nbsp;'output is 100<br>
+&nbsp;</font><p>Well its something that you already know. <br>
+              Here is more complicated structure:</td>
+              <td width="48%" height="181">
+              <img border="0" src="node.GIF" width="229" height="139"></td>
+            </tr>
+          </table>
+          <p><img border="0" src="node2.GIF" width="429" height="417"></p>
+          <p>Next set of statements will create structure like this one<br>
+          <br>
+          <font face="Courier">Dim Root as New ExpNode 'node1<br>
+          Root.SetNode(&quot;-&quot;, 0) <font color="#008000">' (operator, value) =&gt; only 
+          one is needed</font><br>
+          Set Root.LeftNode = New ExpNode <font color="#008000">'node2 create new 
+          node</font><br>
+          Set Root.RightNode = New ExpNode <font color="#008000">'node3</font><br>
+          <br>
+          Root.LeftNode.SetNode(&quot;*&quot;,0) <br>
+          Root.RightNode.SetNode(&quot;&quot;, 15) <br>
+          Set Root.LeftNode.LeftNode = New ExpNode <font color="#008000">'node4</font><br>
+          Set Root.LeftNode.RightNode = New ExpNode <font color="#008000">'node5</font><br>
+          Root.LeftNode.LeftNode.SetNode(&quot;&quot;, 5)<br>
+          Root.LeftNode.RightNode.SetNode(&quot;+&quot;,0)<br>
+          <br>
+          Set Root.LeftNode.RightNode.LeftNode = New ExpNode
+          <font color="#008000">' node6</font><br>
+          Set Root.LeftNode.RightNode.RightNode = New ExpNode
+          <font color="#008000">' node7</font></font></p>
+          <p><font face="Courier">Root.LeftNode.RightNode.LeftNode.SetNode(&quot;&quot;, 
+          10)<br>
+          Root.LeftNode.RightNode.RightNode.SetNode(&quot;&quot;, 10)<br>
+          <br>
+          Debug.Prinf Root.GetValue()</font><font color="#008000"><font face="Courier">' 
+          output is 85 i think</font><br>
+          <br>
+          </font>If you try to calculate value you will first calculate Node5 
+          (10+10) , then Node2 (5*20), and Node1 (100 -15 ) result is 85. This 
+          tree could be writen as (10+10)*5-15. But i had something like <b>x^2 
+          - 2*x</b> or <b>exp(x)- sin(x)-4</b> where x is variable. Next picture 
+          shows tree with variables. <i>If vb collection is linked list then it&nbsp; 
+          has one element more.</i><br>
+          <br>
+          <img border="0" src="node32.GIF" width="486" height="408"></p>
+          <p>Parsing expresion x^2 - 2*x&nbsp; produces x^2 and 2*x then parsing 
+          x^2 we get variable X and 2,<b> </b>node4 and node5. When variable is 
+          found reference to node is added to Vars Colection (green conector 
+          from the left), next time if the same variable is found Left node is 
+          linked to node from Vars colection. Here is the way how to update 
+          variable:<br>
+          <br>
+          <font face="Courier New">Dim N As ExpNode<br>
+          Set N = Vars(&quot;x&quot;)<br>
+          N.Value = new_value<br>
+          </font><br>
+          Note that Value of node4&nbsp; is only changed. Node7 is linked to 
+          node4 and returns value of node4. Next problem is how to build tree 
+          from math expresion.<br>
+&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="5%" height="22">&nbsp;</td>
+          <td width="195%" height="22" valign="top" class="c1">Parsing expresion<hr color="#C0C0C0" align="left" style="border: 1px dotted #000080; padding: 1; background-color: #004080" size="1"></td>
+        </tr>
+        <tr>
+          <td width="5%" height="602">&nbsp;</td>
+          <td width="195%" height="602" valign="top" class="c2">Idea: Split 
+          complex expresion to two less complex.<br>
+&nbsp;<br>
+          eg. parsing expresion <b><font color="#800000">sin(x+1)</font> </b>
+          <font color="#000080"><b>+ </b></font><b><font color="#008000">
+          cos(2*x) - exp(x)</font><br>
+&nbsp;</b><ul>
+            <li>Find first operator &quot;+&quot; or &quot;-&quot; (they have lowest priority) and 
+            split expresion, only condition is that number of left backets&nbsp;&nbsp;&nbsp;&nbsp; 
+            is equal to number of right brackets before operator. In this 
+            expresion its operator &quot;+&quot; after <b>Sin(x+1)</b></li>
+            <li>If expresion doesn't contain &quot;+&quot; or &quot;-&quot; search for operator with 
+            higher&nbsp; priority &quot;*&quot; or &quot;/&quot;</li>
+            <li>Search for &quot;^&quot;</li>
+            <li>Search for &quot;!&quot;</li>
+            <li>Search for function</li>
+          </ul>
+          <p>Here is anothre image<br>
+          <img border="0" src="node4.GIF" width="648" height="491"></p>
+          <p><br>
+          As you may see from the picture its recursive proces. In vb we write:<br>
+          <br>
+          <font face="Courier New"><font color="#000080">Function</font> Parse 
+          (n as ExpNode)<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; <font color="#000080">If</font> IsNumeric(n.sExp)
+          <font color="#000080">Then</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; n.Value = Val(n.sExp) <font color="#008000">
+          'nuber found</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="#000080">Exit Function</font><br>
+&nbsp;&nbsp;&nbsp; <font color="#000080">End if</font><br>
+&nbsp;&nbsp;&nbsp; &lt;scan for operators &gt;<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; <font color="#000080">if not</font>(n.leftnode
+          <font color="#000080">is nothing) Then</font> Parse(n.leftnode)
+          <font color="#008000">'nodes contines smaller expresions or values<br>
+          </font>&nbsp;&nbsp;&nbsp; <font color="#000080">if not(</font>n.rightnode
+          <font color="#000080">is nothing) Then</font> Parse(n.rightnode)<br>
+          <font color="#000080">End Function<br>
+          <br>
+          </font><font color="#008000">'using</font><font color="#000080"><br>
+          Dim</font> Root <font color="#000080">As New</font> ExpNode<br>
+          Root.sExp = &quot;sin(x+1) + cos(2*x) - exp(x)&quot;<br>
+          Parse Root<font color="#000080"><br>
+          <br>
+          <br>
+          </font></font>In my sample i used next functions for spliting:</p>
+          <table border="1" cellpadding="3" cellspacing="1"  bordercolor="#808080" width="100%" id="AutoNumber4" class="c2" style="border-collapse: collapse; border-style: solid">
+            <tr>
+              <td width="39%" valign="top" bgcolor="#E1E1E1"><font color="#800000">CharCount</font><br>
+              (sExp As String, sLen As 
+              Integer, ch As String)</td>
+              <td width="61%" valign="top">Counts the number of character <b>ch</b> 
+              in <b>&nbsp;</b>string sExp to char at position sLen.</td>
+            </tr>
+            <tr>
+              <td width="39%" valign="top" bgcolor="#E1E1E1"><font color="#800000">FindOp</font><br>
+              (sExp As String, op_list As 
+              String,<br>
+              found_op As String) As Integer<br>
+&nbsp;</td>
+              <td width="61%" valign="top">Scan for operators in <b>op_list</b>, 
+              and returns operator&nbsp; to&nbsp; found_op argument.<br>
+              eg.&nbsp; pos = FindOp(&quot;sin(x+1)-2&quot;, &quot;+-&quot;, op)&nbsp; <br>
+              op is &quot;-&quot; , and pos is&nbsp; 9<br>
+&nbsp;</td>
+            </tr>
+            <tr>
+              <td width="39%" valign="top" bgcolor="#E1E1E1"><font color="#800000">FindFunc<br>
+              </font>(sExp As String, 
+              sArg As String,<br>
+&nbsp;sArg2 As String) As String<br>
+&nbsp;</td>
+              <td width="61%" valign="top">Scan for function&nbsp; &lt;fname&gt; ( 
+              &lt;arg1&gt;, &lt;arg2&gt; )<br>
+              eg.&nbsp; op = FindFunc(&quot;cos(x^2)&quot;,&nbsp; arg1, arg2)<br>
+              op is &quot;cos&quot;<br>
+              arg1 is &quot;x^2&quot; , arg2 is &quot;&quot;<br>
+&nbsp;</td>
+            </tr>
+            <tr>
+              <td width="39%" valign="top" bgcolor="#E1E1E1"><font color="#800000">ValidRemove</font>(sExp As String) As 
+              Boolean<br>
+&nbsp;</td>
+              <td width="61%" valign="top">Cheks if brackets are removed 
+              coretctly<br>
+              eg.&nbsp; (x+1) - (x+2)<br>
+              if you remove left and right bracket you get&nbsp; <b>x+1) - (x+2
+              </b>&nbsp;wich is no good<br>
+              but&nbsp; (x+1) to x+1 is good</td>
+            </tr>
+            <tr>
+              <td width="39%" valign="top" bgcolor="#E1E1E1"><font color="#800000">RemoveBrackets</font>(sExp As 
+              String) As String<br>
+&nbsp;</td>
+              <td width="61%" valign="top">Clear unwanted brackets.<br>
+              (x-1) * (x+1)<br>
+              RemoveBrackets returns&nbsp; (x-1)*(x+1) , the same<br>
+              After spliting we get (x-1) , (x+1) , function FindOp wont see 
+              operator + or - because they are in brackets, RemoveBrackets 
+              produces x-1 , x+1</td>
+            </tr>
+          </table>&nbsp;<p>&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="5%" height="21">&nbsp;</td>
+          <td width="195%" height="21" valign="top" class="c1"><p>Clean up, 
+          destroying tree<hr color="#C0C0C0" align="left" style="border: 1px dotted #000080; padding: 1; background-color: #004080" size="1"></td>
+        </tr>
+        <tr>
+          <td width="5%" height="52">&nbsp;</td>
+          <td width="195%" height="52" valign="top" class="c2">If you take a 
+          look to image above, and if you destroy collection vars all extra 
+          references are removed, now destroying Node1 will produce catastrophe, 
+          all nodes will be removed.<br>
+          <br>
+          <br>
+          This is end of story about trees and i hope that you will be able to 
+          make more complicated ExpTrees wich can handle functions with several 
+          hounderd (or more than two)&nbsp; arguments, also when recalculating 
+          expresion , calculate only nodes where variable is changed, or make 
+          ProgramTrees, or AntBrainTree, or somthing else, and of course make 
+          syntax checking.<br>
+          <br>
+&nbsp;</td>
+        </tr>
+      </table>
+      </td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>
